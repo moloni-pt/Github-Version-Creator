@@ -1,4 +1,4 @@
-import { getInput, setOutput, setFailed } from '@actions/core';
+import { getInput, setOutput, setFailed, info } from '@actions/core';
 import { context } from '@actions/github';
 
 import { composerVersion } from './composer';
@@ -7,14 +7,17 @@ try {
   const usedMethod = getInput('method');
   const filePath = getInput('path');
 
-  console.log(`Creating a new version using method: ${usedMethod}`);
-  console.log(`Using the directory: ${filePath}`);
+  info(`Creating a new version using method: ${usedMethod}`);
+  info(`Using the directory: ${filePath}`);
 
   const nextVersion = 'V1.0.1';
 
-  composerVersion(filePath);
+  if (usedMethod === 'composer.json') {
+    setOutput("version", composerVersion(filePath));
+  } else {
 
-  setOutput("version", nextVersion);
+  }
+
 
   if (context.payload && context.payload.head_commit && context.payload.head_commit.message) {
     setOutput("commit_title", context.payload.head_commit.message);
