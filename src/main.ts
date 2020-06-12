@@ -23,15 +23,13 @@ try {
   if (currentVersion.length === 0) {
     setFailed("Failed obtaining the current version");
   } else {
-    info(`Next Version: ${currentVersion}`);
+    info(`Current Version: ${currentVersion}`);
     setOutput("version", currentVersion);
 
     if (context.payload && context.payload.head_commit && context.payload.head_commit.message) {
       setOutput("commit_title", context.payload.head_commit.message);
     }
   }
-
-  setFailed('This is a test that should fail');
 } catch (error) {
   setFailed(error.message);
 }
