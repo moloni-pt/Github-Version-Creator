@@ -17,4 +17,4 @@ jobs:
         uses: ./
         id: package-version
         with:
-          method: "composer.json"
+          method: "package.json"
