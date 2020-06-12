@@ -23,3 +23,9 @@ jobs:
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
       run: npm ci
+
+    - name: Reading Version
+      uses: moloni-pt/github-version-creator@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      id: package-version
