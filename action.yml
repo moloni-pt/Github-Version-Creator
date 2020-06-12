@@ -14,4 +14,4 @@ outputs:
     description: 'Commit description that created this action'
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: 'dist/index.js'
