@@ -14,12 +14,10 @@ try {
   info(`Creating a new version using method: ${usedMethod}`);
   info(`Using the directory: ${filePath}`);
 
-  if (usedMethod === 'composer.json') {
-    currentVersion = composerVersion(filePath);
-  } else if (usedMethod === 'package.json') {
-    currentVersion = packageVersion(filePath);
-  } else {
-    currentVersion = tagVersion();
+  switch (usedMethod) {
+    case 'composer.json': currentVersion = composerVersion(filePath); break;
+    case 'package.json': currentVersion = packageVersion(filePath); break;
+    default: currentVersion = tagVersion(); break;
   }
 
   if (currentVersion.length === 0) {

@@ -8,6 +8,9 @@
     "build": "tsc && ncc build -o lib src/main.ts",
     "build:watch": "tsc -w"
   },
+  "pre-commit": [
+    "build"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -28,6 +31,7 @@
     "jest": "^24.8.0",
     "jest-circus": "^24.7.1",
     "lint-staged": "^9.4.3",
+    "pre-commit": "^1.2.2",
     "prettier": "^1.19.1",
     "ts-jest": "^24.0.2",
     "typescript": "^3.5.1"
