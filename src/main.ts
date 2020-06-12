@@ -2,6 +2,7 @@ import { getInput, setOutput, setFailed, info } from '@actions/core';
 import { context } from '@actions/github';
 
 import { composerVersion } from './composer';
+import { packageVersion } from './package';
 import { tagVersion } from './tag';
 
 try {
@@ -13,10 +14,10 @@ try {
   info(`Creating a new version using method: ${usedMethod}`);
   info(`Using the directory: ${filePath}`);
 
-
-
   if (usedMethod === 'composer.json') {
     currentVersion = composerVersion(filePath);
+  } else if (usedMethod === 'package.json') {
+    currentVersion = packageVersion(filePath);
   } else {
     currentVersion = tagVersion();
   }

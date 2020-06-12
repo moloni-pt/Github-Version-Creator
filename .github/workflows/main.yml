@@ -12,3 +12,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Testing Myself
+        uses: ./
+        id: package-version
+        with:
+          method: "composer.json"
