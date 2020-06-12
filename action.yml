@@ -1,17 +1,21 @@
-name: 'Github Version Creator'
-description: 'Generate a new variable with the new version'
+name: "Github Version Creator"
+description: "Generate a new variable with the new version"
 inputs:
   method:
-    description: 'Which method should be used to generate the new Version'
+    description: "Which method should be used to generate the new Version"
     required: true
-    default: 'auto'
+    default: "auto"
+  path:
+    description: "Path to a JSON file to read from"
+    required: true
+    default: "./"
 outputs:
   version:
-    description: 'New version'
+    description: "New version"
   commit_title:
-    description: 'Commit title that created this action'
+    description: "Commit title that created this action"
   commit_description:
-    description: 'Commit description that created this action'
+    description: "Commit description that created this action"
 runs:
-  using: 'node12'
-  main: 'lib/index.js'
+  using: "node12"
+  main: "lib/index.js"

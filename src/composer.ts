@@ -11,9 +11,13 @@ export const findComposer = (path: string): string => {
 
 export const composerVersion = (path: string): string => {
 
-  let composerFile = findComposer(path);
-  let composerData = JSON.parse(composerFile);
-  console.log(composerData);
-
-  return 'V1';
+  try {
+    let composerFile = findComposer(path);
+    let composerData = JSON.parse(composerFile);
+    console.log(composerData);
+    return 'V1';
+  } catch (error) {
+    throw `Could not load the file from  ${path}composer.json`;
+    return '';
+  }
 }

@@ -5,11 +5,14 @@ import { composerVersion } from './composer';
 
 try {
   const usedMethod = getInput('method');
+  const filePath = getInput('path');
+
   console.log(`Creating a new version using method: ${usedMethod}`);
+  console.log(`Using the directory: ${filePath}`);
 
   const nextVersion = 'V1.0.1';
 
-  composerVersion('composer.json');
+  composerVersion(filePath);
 
   setOutput("version", nextVersion);
 
