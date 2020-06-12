@@ -17,7 +17,6 @@ export const composerVersion = (path: string): string => {
     console.log(composerData);
     return 'V1';
   } catch (error) {
-    throw `Could not load the file from  ${path}composer.json`;
-    return '';
+    throw new Error(`Could not load the file from  ${path}composer.json`);
   }
 }
