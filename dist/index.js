@@ -7957,7 +7957,7 @@ __webpack_require__.r(__webpack_exports__);
 
 try {
   const usedMethod = Object(_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('method');
-  console.log(`Creating a new version using method: ${method}`);
+  console.log(`Creating a new version using method: ${usedMethod}`);
 
   const nextVersion = 'V1.0.1';
 

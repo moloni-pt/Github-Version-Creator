@@ -3,7 +3,7 @@ import { context } from '@actions/github';
 
 try {
   const usedMethod = getInput('method');
-  console.log(`Creating a new version using method: ${method}`);
+  console.log(`Creating a new version using method: ${usedMethod}`);
 
   const nextVersion = 'V1.0.1';
 
