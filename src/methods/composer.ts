@@ -1,5 +1,6 @@
 import fs from 'fs';
 import { join } from 'path';
+import { info } from '@actions/core';
 
 /**
  * Find package.json with path.
@@ -49,8 +50,11 @@ export const releaseDescription = (path: string): { version: string, title: stri
         releaseDescription.title = composerData.extra.changelog[0].title;
       }
 
-      if (composerData.extra.changelog[0].description.lenght > 0) {
-        composerData.extra.changelog[0].description.forEach(line => {
+      if (composerData.extra.changelog[0].description) {
+          info(JSON.stringify(composerData.extra.changelog[0].description))
+
+        composerData.extra.changelog[0].description.forEach((line: string) => {
+          info(line);
           releaseDescription.description += `${line}\n`;
         });
       }
