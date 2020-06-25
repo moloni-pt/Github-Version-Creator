@@ -1,12 +1,15 @@
 import { getInput, setOutput, setFailed, info } from '@actions/core';
 import { context } from '@actions/github';
 
-import { composerVersion } from './composer';
-import { packageVersion } from './package';
-import { tagVersion } from './tag';
+import { releaseDescription } from './methods/composer';
+import { packageVersion } from './methods/package';
 
 try {
-  let currentVersion = '';
+  let currentRelease = {
+    'title': '',
+    'description': '',
+    'version': ''
+  };
 
   const usedMethod = getInput('method');
   const filePath = getInput('path');
@@ -15,20 +18,30 @@ try {
   info(`Using the directory: ${filePath}`);
 
   switch (usedMethod) {
-    case 'composer.json': currentVersion = composerVersion(filePath); break;
-    case 'package.json': currentVersion = packageVersion(filePath); break;
-    default: currentVersion = tagVersion(); break;
+    case 'composer.json': currentRelease = releaseDescription(filePath); break;
+    case 'package.json': currentRelease.version = packageVersion(filePath); break;
+    default: currentRelease = releaseDescription(filePath); break;
   }
 
-  if (currentVersion.length === 0) {
-    setFailed("Failed obtaining the current version");
-  } else {
-    info(`Current Version: ${currentVersion}`);
-    setOutput("version", currentVersion);
+  if (currentRelease.version.length === 0) {
+    throw new Error(`Failed obtaining the current version`);
+  }
 
+  info(`Release Version: ${currentRelease.version}`);
+  setOutput("version", currentRelease.version);
+
+  if (currentRelease.title.length === 0) {
     if (context.payload && context.payload.head_commit && context.payload.head_commit.message) {
-      setOutput("commit_title", context.payload.head_commit.message);
+      setOutput("title", context.payload.head_commit.message);
     }
+  } else {
+    info(`Release Title: ${currentRelease.title}`);
+    setOutput("title", currentRelease.title);
+  }
+
+  if (currentRelease.title.length > 0) {
+    info(`Release Description: ${currentRelease.description}`);
+    setOutput("description", currentRelease.description);
   }
 } catch (error) {
   setFailed(error.message);

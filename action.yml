@@ -12,10 +12,12 @@ inputs:
 outputs:
   version:
     description: "New version"
-  commit_title:
+  title:
     description: "Commit title that created this action"
-  commit_description:
+  description:
     description: "Commit description that created this action"
+  is_new_version:
+    description: "True or False if the version output is different than the latest tag"
 runs:
   using: "node12"
   main: "lib/index.js"

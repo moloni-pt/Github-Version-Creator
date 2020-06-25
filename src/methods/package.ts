@@ -24,3 +24,4 @@ export const packageVersion = (path: string): string => {
     throw new Error(`Could not load the file from  ${path}package.json`);
   }
 }
+
