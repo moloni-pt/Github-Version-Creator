@@ -24,7 +24,8 @@ try {
   }
 
   const ref = process.env.GITHUB_REF;
-
+  info(`Reference push: ${ref}`);
+  
   if (ref && ref.startsWith("refs/tags/")) {
     const tag = ref.replace(/^refs\/tags\//, "");
     info(`Release Tag: ${tag}`);
