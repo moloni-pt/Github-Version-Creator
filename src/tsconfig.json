@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
-    "module": "amd",
-    "moduleResolution": "node",
-    "outFile": "../lib/index.js"
+    "outDir": "../lib"
   },
   "files": [
     "main.ts"
