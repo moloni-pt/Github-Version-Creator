@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "outDir": "../lib"
+    "module": "system",
+    "moduleResolution": "node",
+    "outFile": "../lib/index.js"
   },
   "files": [
     "main.ts"
