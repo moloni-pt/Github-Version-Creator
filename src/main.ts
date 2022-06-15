@@ -1,42 +1,36 @@
-import { getInput, setOutput, setFailed, info } from "@actions/core";
-import { context } from "@actions/github";
+import { getInput, setOutput, setFailed, info } from '@actions/core';
+import { context } from '@actions/github';
 
-import { releaseDescription } from "./methods/composer";
-import { packageVersion } from "./methods/package";
+import { releaseDescription } from './methods/composer';
+import { packageVersion } from './methods/package';
 
 try {
-  let tag = "";
-  let currentRelease: { version: string; title: string; description: string; tag?: string } = {
-    "title": "",
-    "description": "",
-    "version": "",
-    tag
+  let currentRelease = {
+    'title': '',
+    'description': '',
+    'version': ''
   };
 
-  const usedMethod = getInput("method");
-  const filePath = getInput("path");
+  const usedMethod = getInput('method');
+  const filePath = getInput('path');
 
   info(`Creating a new version using method: ${usedMethod}`);
   info(`Using the directory: ${filePath}`);
 
   switch (usedMethod) {
-    case "composer.json":
-      currentRelease = releaseDescription(filePath);
-      break;
-    case "package.json":
-      currentRelease.version = packageVersion(filePath);
-      break;
-    default:
-      currentRelease = releaseDescription(filePath);
-      break;
+    case 'composer.json': currentRelease = releaseDescription(filePath); break;
+    case 'package.json': currentRelease.version = packageVersion(filePath); break;
+    default: currentRelease = releaseDescription(filePath); break;
   }
 
   const ref = process.env.GITHUB_REF;
 
   if (ref && !ref?.startsWith("refs/tags/")) {
-    currentRelease.tag = ref.replace(/^refs\/tags\//, "");
+    const tag = ref.replace(/^refs\/tags\//, "");
+    setOutput("tag", tag);
+
   } else {
-    currentRelease.tag = "";
+    setOutput("tag", "");
   }
 
   if (currentRelease.version.length === 0) {
@@ -59,8 +53,6 @@ try {
     info(`Release Description: ${currentRelease.description}`);
     setOutput("description", currentRelease.description);
   }
-
-  setOutput("tag", currentRelease.tag);
 } catch (error) {
   setFailed(error.message);
 }

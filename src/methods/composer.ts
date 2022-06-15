@@ -26,12 +26,11 @@ export const composerVersion = (path: string): string => {
   }
 }
 
-export const releaseDescription = (path: string): { version: string, title: string, description: string, tag?: string } => {
+export const releaseDescription = (path: string): { version: string, title: string, description: string } => {
   const releaseDescription = {
     'title': '',
     'description': '',
-    'version': '',
-    'tag': ''
+    'version': ''
   };
 
   try {
