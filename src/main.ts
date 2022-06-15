@@ -25,16 +25,13 @@ try {
 
   const ref = process.env.GITHUB_REF;
 
-  if (ref && !ref?.startsWith("refs/tags/")) {
+  if (ref && ref.startsWith("refs/tags/")) {
     const tag = ref.replace(/^refs\/tags\//, "");
+    info(`Release Tag: ${tag}`);
     setOutput("tag", tag);
 
   } else {
     setOutput("tag", "");
-  }
-
-  if (currentRelease.version.length === 0) {
-    throw new Error(`Failed obtaining the current version`);
   }
 
   info(`Release Version: ${currentRelease.version}`);

@@ -18,6 +18,9 @@ outputs:
     description: "Commit description that created this action"
   is_new_version:
     description: "True or False if the version output is different than the latest tag"
+  tag:
+    description: "Tag name when a tag is pushed"
+
 runs:
   using: "node12"
   main: "lib/index.js"
