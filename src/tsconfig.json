@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "outDir": "../lib"
+  },
+  "files": [
+    "main.ts"
+  ]
+}
