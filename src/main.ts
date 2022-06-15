@@ -35,6 +35,7 @@ try {
     setOutput("tag", "");
   }
 
+  info(JSON.stringify(context));
   info(`Release Version: ${currentRelease.version}`);
   setOutput("version", currentRelease.version);
 
